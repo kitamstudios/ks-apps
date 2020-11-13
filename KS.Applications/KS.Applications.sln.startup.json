@@ -1,0 +1,16 @@
+// Install from: https://marketplace.visualstudio.com/items?itemName=vs-publisher-141975.SwitchStartupProjectforVS2017
+// This is a configuration file for the SwitchStartupProject Visual Studio Extension
+// See https://bitbucket.org/thirteen/switchstartupproject/src/tip/Configuration.md
+{
+  "Version": 3,
+
+  "ListAllProjects": false,
+
+  "MultiProjectConfigurations": {
+    "WebUI": {
+      "Projects": {
+        "KS.Applications.WebUI": { }
+      }
+    }
+  }
+}

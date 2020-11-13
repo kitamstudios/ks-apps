@@ -1,0 +1,50 @@
+<Project>
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <IsPackable>false</IsPackable>
+
+    <!-- Code Analysis -->
+    <AnalysisLevel>latest</AnalysisLevel>
+    <AnalysisMode>AllEnabledByDefault</AnalysisMode>
+    <CodeAnalysisTreatWarningsAsErrors Condition="'$(Configuration)' != 'Debug'">true</CodeAnalysisTreatWarningsAsErrors>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <EnforceCodeStyleInBuild Condition="'$(Configuration)' != 'Debug'">true</EnforceCodeStyleInBuild>
+
+    <!-- Compilation stuff -->
+    <TreatWarningsAsErrors Condition="'$(Configuration)' != 'Debug'">true</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory).editorconfig" Link=".editorconfig" />
+    <Compile Include="$(MSBuildThisFileDirectory)AssemblyAttributes.cs" Link="AssemblyAttributes.cs" />
+  </ItemGroup>
+
+  <!-- Disable bunch of stuff for non-product builds -->
+  <Choose>
+    <When Condition=" '$(DesignTimeBuild)' == 'true' OR '$(BuildingForLiveUnitTesting)' == 'true' ">
+      <PropertyGroup>
+        <AnalysisMode>AllDisabledByDefault</AnalysisMode>
+        <EnableNETAnalyzers>false</EnableNETAnalyzers>
+        <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
+      </PropertyGroup>
+    </When>
+  </Choose>
+
+  <!--ItemGroup>
+    <PackageReference Include="Autofac" Version="6.0.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="3.1.6" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.6" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.1.6" />
+    <PackageReference Include="Microsoft.CodeAnalysis" Version="3.7.0" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="AutoMapper" Version="10.1.1" />
+    <PackageReference Update="FluentValidation" Version="9.3.0" />
+    <PackageReference Update="MediatR" Version="9.0.0" />
+  </ItemGroup-->
+
+</Project>

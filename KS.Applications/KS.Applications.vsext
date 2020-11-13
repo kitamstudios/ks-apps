@@ -1,0 +1,16 @@
+{
+  "id": "19bc3beb-45f6-4a50-bcee-50c6b1cdec2f",
+  "name": "My Visual Studio extensions",
+  "description": "A collection of my Visual Studio extensions",
+  "version": "1.0",
+  "extensions": [
+    {
+      "name": "SwitchStartupProject for VS 2019",
+      "vsixId": "399c17d5-6a98-44e4-938e-6d0f1f804076"
+    },
+    {
+      "name": "Visual Studio Spell Checker (VS2017 and Later)",
+      "vsixId": "43EA967E-0DE2-4136-8E52-C6DCFB5C2748"
+    }
+  ]
+}
