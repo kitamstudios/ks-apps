@@ -3,6 +3,7 @@
     <TargetFramework>net5.0</TargetFramework>
     <LangVersion>9.0</LangVersion>
     <IsPackable>false</IsPackable>
+    <IdeInternalBuild>false</IdeInternalBuild>
 
     <!-- Code Analysis -->
     <AnalysisLevel>latest</AnalysisLevel>
@@ -18,18 +19,25 @@
   <ItemGroup>
     <AdditionalFiles Include="$(MSBuildThisFileDirectory).editorconfig" Link=".editorconfig" />
     <Compile Include="$(MSBuildThisFileDirectory)AssemblyAttributes.cs" Link="AssemblyAttributes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GlobalSuppressions.cs" Link="GlobalSuppressions.cs" />
   </ItemGroup>
 
   <!-- Disable bunch of stuff for non-product builds -->
   <Choose>
     <When Condition=" '$(DesignTimeBuild)' == 'true' OR '$(BuildingForLiveUnitTesting)' == 'true' ">
       <PropertyGroup>
+        <IdeInternalBuild>true</IdeInternalBuild>
         <AnalysisMode>AllDisabledByDefault</AnalysisMode>
         <EnableNETAnalyzers>false</EnableNETAnalyzers>
         <EnforceCodeStyleInBuild>false</EnforceCodeStyleInBuild>
       </PropertyGroup>
     </When>
   </Choose>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.0.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="7.1.0" />
+  </ItemGroup>
 
   <!--ItemGroup>
     <PackageReference Include="Autofac" Version="6.0.0" />

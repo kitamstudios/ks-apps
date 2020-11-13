@@ -1,10 +1,13 @@
 namespace KS.Applications.WebUI
 {
+    using System.Linq;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.Extensions.Configuration;
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
+    using NSwag;
+    using NSwag.Generation.Processors.Security;
 
     public class Startup
     {
@@ -24,6 +27,20 @@ namespace KS.Applications.WebUI
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
+            });
+
+            services.AddOpenApiDocument(configure =>
+            {
+                configure.Title = "CleanArchitecture API";
+                configure.AddSecurity("JWT", Enumerable.Empty<string>(), new OpenApiSecurityScheme
+                {
+                    Type = OpenApiSecuritySchemeType.ApiKey,
+                    Name = "Authorization",
+                    In = OpenApiSecurityApiKeyLocation.Header,
+                    Description = "Type into the textbox: Bearer {your JWT token}."
+                });
+
+                configure.OperationProcessors.Add(new AspNetCoreOperationSecurityScopeProcessor("JWT"));
             });
         }
 
@@ -47,6 +64,12 @@ namespace KS.Applications.WebUI
             {
                 app.UseSpaStaticFiles();
             }
+
+            app.UseSwaggerUi3(settings =>
+            {
+                settings.Path = "/api";
+                settings.DocumentPath = "/api/specification.json";
+            });
 
             app.UseRouting();
 
